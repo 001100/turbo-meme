@@ -13,6 +13,7 @@
 #include "player.h"
 #include "keyboard_input.h"
 #include "log.h"
+#include "title_screen.h"
 
 #include "output.h" // For InitWindows
 
@@ -50,8 +51,15 @@ int main()
     Player NewPlayer;
         PLAYER = &NewPlayer;
 
+    TitleScreen();
     // Main loop.
-    while (true)
+    bool exitStatus = false;
+    do
+    {
+
+    TitleScreen();
+
+    while (!exitStatus)
     {
         FIELD->DrawField();
         Log::Read(8);
@@ -65,6 +73,7 @@ int main()
         Clear(MAIN_WIN);
         Clear(LOG_WIN);
     }
+    } while (!exitStatus);
 
     // Ncurses end.
     endwin();

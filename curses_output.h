@@ -20,7 +20,6 @@ class CursesOutput
         static void CursesRefresh(wType win);
         static void CursesClear(wType win);
         static void InitCursesWindows();
-
 };
 
 #endif // CURSES_OUTPUT_H

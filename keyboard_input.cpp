@@ -7,9 +7,9 @@ void KeyboardInput::KeyPresses()
     bool KeyCheck = false;
 
     do {
-    int chMovementDirection = getch();
+    int pressedKey = getch();
     KeyCheck = false;
-    switch (chMovementDirection)
+    switch (pressedKey)
     {
         // Exit key
         case 'q': exit(0);
