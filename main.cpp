@@ -51,13 +51,21 @@ int main()
     Player NewPlayer;
         PLAYER = &NewPlayer;
 
-    TitleScreen();
+    Menu TitleScreenMenu;
+    TitleScreenMenu.AddMenuElement("New Game");
+    TitleScreenMenu.AddMenuElement("Load Game");
+    TitleScreenMenu.AddMenuElement("Exit");
+
+    TitleScreenMenu.DrawMenu();
+
+
     // Main loop.
     bool exitStatus = false;
     do
     {
 
-    TitleScreen();
+    TitleScreenMenu.DrawMenu();
+    //TitleScreen();
 
     while (!exitStatus)
     {

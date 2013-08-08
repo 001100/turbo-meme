@@ -11,7 +11,7 @@ Field::Field():
     }
     FillField();            //Fills initial field
     //getch();
-    usleep(3000000);
+    //usleep(3000000);
 
 /*
     std::cout << "size: " << m_FieldData.size() << std::endl;

@@ -16,7 +16,6 @@ WINDOW* CursesOutput::m_FullWin;
 //    delwin(m_MainWin);
 //    delwin(m_LogWin);
 //}
-
 void CursesOutput::InitCursesWindows()
 {
     m_MainWin = newwin(LINES - 9, COLS, 0, 0);
