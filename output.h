@@ -1,15 +1,15 @@
 #ifndef OUTPUT_H
 #define OUTPUT_H
 
+#include <ncurses.h>
 #include <string>
 
 #include "globals.h"
-#include "curses_output.h"
 
-void Draw(wType win, std::string text);
-void Draw(wType win, int ly, int lx, std::string text);
-void Refresh(wType win);
+extern WINDOW* MAIN_WIN;
+extern WINDOW* LOG_WIN;
+extern WINDOW* FULL_WIN;
+
 void InitWindows();
-void Clear(wType win);
 
 #endif // OUTPUT_H

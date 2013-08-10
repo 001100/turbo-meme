@@ -42,11 +42,11 @@ void Field::DebugDraw(int y, int x)
 
     Log::Write(logDbgMsg.c_str());
     Log::Read(8);
-    Refresh(LOG_WIN);
+    wrefresh(LOG_WIN);
 
     usleep(50000);
-    Clear(MAIN_WIN);
-    Clear(LOG_WIN);
+    wclear(MAIN_WIN);
+    wclear(LOG_WIN);
 }
 
 void Field::FillField()
@@ -115,28 +115,28 @@ void Field::DrawField()
     {
         for (int width = 0; width < g_WIDTH; ++width)
         {
-            Draw(MAIN_WIN, F(height, width).GetTileChar());
+            wprintw(MAIN_WIN, (F(height, width).GetTileChar()).c_str());
         }
-        Draw(MAIN_WIN, "\n");
+        wprintw(MAIN_WIN, "\n");
     }
-    Refresh(MAIN_WIN);
+    wrefresh(MAIN_WIN);
 }
 
 void Field::DrawPassabilityField()
 {
-    Clear(MAIN_WIN);
+    wclear(MAIN_WIN);
     for (int height = 0; height < g_HEIGHT; ++height)
     {
         for (int width = 0; width < g_WIDTH; ++width)
         {
             if (F(height, width).IsPassable())
-                Draw(MAIN_WIN, "1");
+                wprintw(MAIN_WIN, "1");
             else
-                Draw(MAIN_WIN, "0");
+                wprintw(MAIN_WIN, "0");
 
         }
-        Draw(MAIN_WIN, "\n");
+        wprintw(MAIN_WIN, "\n");
     }
-    Refresh(MAIN_WIN);
+    wrefresh(MAIN_WIN);
     getch();
 }

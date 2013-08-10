@@ -2,14 +2,14 @@
 
 std::vector<std::string> Log::m_LogData;
 
-void Log::Read(unsigned int NumOfLastEntries, wType win)
+void Log::Read(unsigned int NumOfLastEntries, WINDOW* win)
 {
 if (NumOfLastEntries > m_LogData.size())
     {
     for (unsigned int Position = 0; Position < m_LogData.size(); ++Position)
     {
-        Draw(win, m_LogData[Position]);
-        Draw(win, "\n");
+        wprintw(win, (m_LogData[Position]).c_str());
+        wprintw(win, "\n");
     }
     }
 else
@@ -17,8 +17,8 @@ else
     for (unsigned int Position = m_LogData.size() - NumOfLastEntries;
                          Position < m_LogData.size(); ++Position)
     {
-        Draw(win, m_LogData[Position]);
-        Draw(win, "\n");
+        wprintw(win, (m_LogData[Position]).c_str());
+        wprintw(win, "\n");
     }
     }
 }
@@ -31,10 +31,10 @@ void Log::Write(const char* text)
 void Log::FullscreenRead()
 {
     Read(LINES, FULL_WIN);
-    Refresh(FULL_WIN);
+    wrefresh(FULL_WIN);
 
     getch();
 
-    Clear(FULL_WIN);
-    Refresh(FULL_WIN);
+    wclear(FULL_WIN);
+    wrefresh(FULL_WIN);
 }

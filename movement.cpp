@@ -4,7 +4,7 @@ void MovableTile::TileMovement(int ly, int lx)
 {
     // Passability check.
     if (!(m_Field((GetPosition('y') + ly), (GetPosition('x') + lx)).IsPassable()))
-        //Draw(LOG_WIN, "Tile is impassable!");
+        //wprintw(LOG_WIN, "Tile is impassable!");
         Log::Write("Tile is impassable!");
     else
     {

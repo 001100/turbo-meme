@@ -8,29 +8,21 @@ void Menu::AddMenuElement(std::string NewMenuElement)
 
 void Menu::DrawMenu()
 {
-    Clear(MAIN_WIN);
-    Clear(LOG_WIN);
-    Clear(FULL_WIN);
+    wclear(MAIN_WIN);
+    wclear(LOG_WIN);
+    wclear(FULL_WIN);
     // Draw at the center of the screen.
     int y = LINES/2;
     int x = COLS/2;
 
     for (unsigned int iii = 0; iii < m_MenuElements.size(); iii++)
     {
-        Draw(FULL_WIN, y, x, m_MenuElements[iii]);
+        mvwprintw(FULL_WIN, y, x, m_MenuElements[iii].c_str());
         y++; // Draw at the next line.
     }
 
-    Refresh(FULL_WIN);
+    wrefresh(FULL_WIN);
     getch();
-    Clear(FULL_WIN);
-}
-
-void TitleScreen()
-{
-    Draw(FULL_WIN, LINES/2, COLS/2, "Start New Game");
-    Refresh(FULL_WIN);
-    getch();
-    Clear(FULL_WIN);
+    wclear(FULL_WIN);
 }
 

@@ -9,9 +9,6 @@
 #include "globals.h"
 #include "output.h"
 
-
-
-
 class Menu
 {
     private:
@@ -23,10 +20,5 @@ class Menu
         void DrawMenu();
 
 };
-
-void TitleScreen();
-
-
-
 
 #endif // TITLE_SCREEN_H_INCLUDED

@@ -9,6 +9,9 @@
 
 // TODO: Log have unrestricted storage - bad for memory.
 
+extern WINDOW* LOG_WIN;
+extern WINDOW* FULL_WIN;
+
 class Log
 {
     private:
@@ -18,7 +21,7 @@ class Log
     protected:
     public:
         static void Write(const char* text);
-        static void Read(unsigned int NumOfLastEntries, wType win = LOG_WIN);
+        static void Read(unsigned int NumOfLastEntries, WINDOW* win = LOG_WIN);
         static void FullscreenRead();
 };
 
