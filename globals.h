@@ -1,17 +1,26 @@
 #ifndef GLOBALS_H_INCLUDED
 #define GLOBALS_H_INCLUDED
 
+#include <ncurses.h>
+
+extern WINDOW* SomeWindow;
+
 // Field size.
-const int g_WIDTH = 11;
-const int g_HEIGHT = 11;
+extern const int g_WIDTH;// = 11;
+extern const int g_HEIGHT;// = 11;
 
 // Field area.
-const int g_AREA = g_WIDTH*g_HEIGHT;
+extern const int g_AREA;// = g_WIDTH*g_HEIGHT;
 
-// Enum for ingame screens.
+// Ingame screens.
 enum sType {
     MAIN_SCR,       // MAIN+LOG windows
     TITLE_SCR
 };
+
+// Global windows pointers
+extern WINDOW* MAIN_WIN;
+extern WINDOW* LOG_WIN;
+extern WINDOW* FULL_WIN;
 
 #endif // GLOBALS_H_INCLUDED

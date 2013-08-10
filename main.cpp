@@ -6,11 +6,6 @@
 
 #include <ncurses.h>
 
-// Global windows pointers
-WINDOW* MAIN_WIN = NULL;
-WINDOW* LOG_WIN  = NULL;
-WINDOW* FULL_WIN = NULL;
-
 #include "globals.h"
 #include "field.h"
 #include "tile.h"

@@ -6,9 +6,9 @@
 
 #include "globals.h"
 
-extern WINDOW* MAIN_WIN;
-extern WINDOW* LOG_WIN;
-extern WINDOW* FULL_WIN;
+//extern WINDOW* MAIN_WIN;
+//extern WINDOW* LOG_WIN;
+//extern WINDOW* FULL_WIN;
 
 void InitWindows();
 

@@ -14,8 +14,8 @@
 #include "output.h"
 #include "log.h"    //dbug
 
-extern WINDOW* MAIN_WIN;
-extern WINDOW* LOG_WIN;
+//extern WINDOW* MAIN_WIN;
+//extern WINDOW* LOG_WIN;
 
 class Field
 {

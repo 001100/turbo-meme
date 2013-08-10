@@ -5,12 +5,13 @@
 #include <vector>
 #include "ncurses.h"
 
+#include "globals.h"
 #include "output.h"
 
 // TODO: Log have unrestricted storage - bad for memory.
 
-extern WINDOW* LOG_WIN;
-extern WINDOW* FULL_WIN;
+//extern WINDOW* LOG_WIN;
+//extern WINDOW* FULL_WIN;
 
 class Log
 {
