@@ -1,19 +1,14 @@
 #ifndef MOVABLE_TILE_H
 #define MOVABLE_TILE_H
 
-#include <cassert>
-
 #include "tile.h"
-#include "field.h"
-#include "output.h"
-#include "log.h"
 
 class MovableTile: public Tile
 {
     private:
-        int m_Position[2]; // [0] is y and [1] is x
+        int m_Y;
+        int m_X;
     protected:
-        Field& m_Field;
     public:
         MovableTile(int y, int x);
         virtual ~MovableTile();

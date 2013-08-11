@@ -1,16 +1,22 @@
 #include "movable_tile.h"
 
+#include "game.h"
+#include "field.h"
+#include "log.h"
+
 void MovableTile::TileMovement(int ly, int lx)
 {
     // Passability check.
-    if (!(m_Field((GetPosition('y') + ly), (GetPosition('x') + lx)).IsPassable()))
+    Field& F = *FIELD;
+    Tile& DesignationTile = F(GetPosition('y') + ly, GetPosition('x') + lx);
+    if (!(DesignationTile.IsPassable()))
         //wprintw(LOG_WIN, "Tile is impassable!");
         Log::Write("Tile is impassable!");
     else
     {
     // Erase old position.
     Tile tmpFloorTile(GetID(), "+");
-    m_Field(GetPosition('y'), GetPosition('x')) = tmpFloorTile;
+    F(GetPosition('y'), GetPosition('x')) = tmpFloorTile;
 
     // Change actual position.
     if (ly == -1 && lx == 0) {
@@ -32,6 +38,7 @@ void MovableTile::TileMovement(int ly, int lx)
 
     // Place tile at new position.
     Tile* tmpPlayerTile = this;
-    m_Field(GetPosition('y'), GetPosition('x')) = *tmpPlayerTile;
+    F(GetPosition('y'), GetPosition('x')) = *tmpPlayerTile;
     }
 }
+

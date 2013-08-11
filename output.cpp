@@ -1,5 +1,7 @@
 #include "output.h"
 
+#include "globals.h"
+
 void InitWindows()
 {
     MAIN_WIN = newwin(LINES - 9, COLS, 0, 0);

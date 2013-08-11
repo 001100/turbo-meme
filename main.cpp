@@ -8,10 +8,10 @@
 
 #include "globals.h"
 #include "game.h"
-//#include "field.h"
+#include "field.h"
 //#include "tile.h"
 //#include "movable_tile.h"
-//#include "player.h"
+#include "player.h"
 #include "keyboard_input.h"
 #include "log.h"
 #include "title_screen.h"
@@ -69,7 +69,7 @@ int main()
         wrefresh(MAIN_WIN);
         wrefresh(LOG_WIN);
 
-        KeyboardInput::KeyPresses();
+        KeyPresses();
 
         wclear(MAIN_WIN);
         wclear(LOG_WIN);

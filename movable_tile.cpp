@@ -1,12 +1,14 @@
 #include "movable_tile.h"
-extern Field* FIELD;
 
-MovableTile::MovableTile(int y, int x): Tile(),
-    //m_Field(MyField)
-    m_Field(*FIELD)
+#include <cassert>
+
+#include "game.h"
+
+
+MovableTile::MovableTile(int y, int x): Tile()
 {
-    m_Position[0] = y;
-    m_Position[1] = x;
+    m_Y = y;
+    m_X = x;
 }
 
 MovableTile::~MovableTile()
@@ -18,16 +20,16 @@ int& MovableTile::GetPosition(char axis)
 {
     assert(axis != 'y' || axis != 'x');
     if (axis == 'y')
-        return m_Position[0];
+        return m_Y;
     //if (axis == 'x')          // Simplification, otherwise - warning
-        return m_Position[1];
+        return m_X;
 }
 
 void MovableTile::SetPosition(char axis, int positionDelta)
 {
     assert(axis != 'y' || axis != 'x');
     if (axis == 'y')
-        m_Position[0] += positionDelta;
+        m_Y += positionDelta;
     if (axis == 'x')
-        m_Position[1] += positionDelta;
+        m_X += positionDelta;
 }

@@ -1,8 +1,15 @@
 #include "keyboard_input.h"
-extern Field* FIELD;
-extern Player* PLAYER;
 
-void KeyboardInput::KeyPresses()
+#include <string>
+#include <cstdlib> // For exit().
+
+//#include <ncurses.h> // Here for getch().
+
+#include "game.h"
+#include "field.h"
+#include "player.h"
+
+void KeyPresses()
 {
     bool KeyCheck = false;
 
