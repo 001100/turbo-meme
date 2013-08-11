@@ -1,25 +1,22 @@
 #include <locale>           //for ncurses Unicode support
-#include <iostream>
+//#include <iostream>
 #include <iomanip>          //for std::to_string()
 #include <string>
-#include <vector>
+//#include <vector>
 
 #include <ncurses.h>
 
 #include "globals.h"
-#include "field.h"
-#include "tile.h"
-#include "movable_tile.h"
-#include "player.h"
+#include "game.h"
+//#include "field.h"
+//#include "tile.h"
+//#include "movable_tile.h"
+//#include "player.h"
 #include "keyboard_input.h"
 #include "log.h"
 #include "title_screen.h"
 
 #include "output.h" // For InitWindows
-
-// Global Field and Player pointers
-Field* FIELD   = NULL;
-Player* PLAYER = NULL;
 
 void PrintCurrentPosition()
 {
@@ -45,11 +42,7 @@ int main()
     // Windows initialization.
     InitWindows();
 
-    // All this crap needs to be moved somewhere else.
-    Field MyField;
-        FIELD = &MyField;
-    Player NewPlayer;
-        PLAYER = &NewPlayer;
+    Game* g = new Game;
 
     Menu TitleScreenMenu;
     TitleScreenMenu.AddMenuElement("New Game");
@@ -82,6 +75,8 @@ int main()
         wclear(LOG_WIN);
     }
     } while (!exitStatus);
+
+    delete g;
 
     // Ncurses end.
     endwin();

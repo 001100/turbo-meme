@@ -4,18 +4,15 @@
 //#include <iostream>
 //#include <string>
 #include <iomanip>  //dbug
-#include <vector>
+//#include <vector>
 #include <cassert>
 //#include <ncurses.h> //for getch()
 #include <unistd.h> // for usleep
 
 #include "globals.h"
 #include "tile.h"
-#include "output.h"
+//#include "output.h"
 #include "log.h"    //dbug
-
-//extern WINDOW* MAIN_WIN;
-//extern WINDOW* LOG_WIN;
 
 class Field
 {

@@ -45,6 +45,8 @@
 		</Linker>
 		<Unit filename="field.cpp" />
 		<Unit filename="field.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="globals.cpp" />
 		<Unit filename="globals.h" />
 		<Unit filename="keyboard_input.cpp" />
