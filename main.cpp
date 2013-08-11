@@ -1,8 +1,4 @@
 #include <locale>           //for ncurses Unicode support
-//#include <iostream>
-#include <iomanip>          //for std::to_string()
-#include <string>
-//#include <vector>
 
 #include <ncurses.h>
 
@@ -11,21 +7,12 @@
 #include "field.h"
 //#include "tile.h"
 //#include "movable_tile.h"
-#include "player.h"
+//#include "player.h"
 #include "keyboard_input.h"
 #include "log.h"
 #include "title_screen.h"
 
-#include "output.h" // For InitWindows
-
-void PrintCurrentPosition()
-{
-    mvwprintw(MAIN_WIN, 13, 15, "Your current position is: ");
-    mvwprintw(MAIN_WIN, 13, 41, std::to_string(PLAYER->GetPosition('y')).c_str());
-    mvwprintw(MAIN_WIN, 13, 43, std::to_string(PLAYER->GetPosition('x')).c_str());
-
-    wrefresh(MAIN_WIN);
-}
+#include "output.h"
 
 int main()
 {
@@ -39,17 +26,12 @@ int main()
     noecho();               // Disable echoing keypressings.
     curs_set(0);            // Disable cursor.
 
-    // Windows initialization.
-    InitWindows();
-
     Game* g = new Game;
 
     Menu TitleScreenMenu;
     TitleScreenMenu.AddMenuElement("New Game");
     TitleScreenMenu.AddMenuElement("Load Game");
     TitleScreenMenu.AddMenuElement("Exit");
-
-    TitleScreenMenu.DrawMenu();
 
 
     // Main loop.
@@ -58,7 +40,6 @@ int main()
     {
 
     TitleScreenMenu.DrawMenu();
-    //TitleScreen();
 
     while (!exitStatus)
     {
@@ -66,8 +47,11 @@ int main()
         Log::Read(8);
         PrintCurrentPosition();
 
-        wrefresh(MAIN_WIN);
-        wrefresh(LOG_WIN);
+        //wrefresh(MAIN_WIN);
+        //wrefresh(LOG_WIN);
+        wnoutrefresh(MAIN_WIN);
+        wnoutrefresh(LOG_WIN);
+        doupdate();
 
         KeyPresses();
 

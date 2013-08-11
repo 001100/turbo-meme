@@ -16,7 +16,6 @@ class Menu
         void AddMenuElement(std::string NewMenuElement);
 
         void DrawMenu();
-
 };
 
 #endif // TITLE_SCREEN_H_INCLUDED

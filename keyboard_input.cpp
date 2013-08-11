@@ -3,11 +3,12 @@
 #include <string>
 #include <cstdlib> // For exit().
 
-//#include <ncurses.h> // Here for getch().
+#include <ncurses.h> // Here for getch().
 
 #include "game.h"
 #include "field.h"
 #include "player.h"
+#include "log.h"
 
 void KeyPresses()
 {

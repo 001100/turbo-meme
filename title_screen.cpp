@@ -8,9 +8,10 @@ void Menu::AddMenuElement(std::string NewMenuElement)
 
 void Menu::DrawMenu()
 {
-    wclear(MAIN_WIN);
-    wclear(LOG_WIN);
-    wclear(FULL_WIN);
+//    wclear(MAIN_WIN);
+//    wclear(LOG_WIN);
+//    wclear(FULL_WIN);
+
     // Draw at the center of the screen.
     int y = LINES/2;
     int x = COLS/2;

@@ -1,5 +1,12 @@
 #include "field.h"
 
+#include <ncurses.h>
+#include <iomanip>  //dbug
+#include <cassert>
+#include <unistd.h> // for usleep
+
+#include "log.h"    //dbug
+
 Field::Field():
     F(*this)
 {
@@ -42,7 +49,9 @@ void Field::DebugDraw(int y, int x)
 
     Log::Write(logDbgMsg.c_str());
     Log::Read(8);
-    wrefresh(LOG_WIN);
+    wnoutrefresh(MAIN_WIN);
+    wnoutrefresh(LOG_WIN);
+    doupdate();
 
     usleep(50000);
     wclear(MAIN_WIN);
@@ -119,7 +128,7 @@ void Field::DrawField()
         }
         wprintw(MAIN_WIN, "\n");
     }
-    wrefresh(MAIN_WIN);
+    //wrefresh(MAIN_WIN);
 }
 
 void Field::DrawPassabilityField()
