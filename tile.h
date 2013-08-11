@@ -4,8 +4,6 @@
 #include <string>
 #include <cassert>
 
-//#include "field.h"
-
 class Tile
 {
     private:

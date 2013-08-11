@@ -1,13 +1,11 @@
 #ifndef TITLE_SCREEN_H_INCLUDED
 #define TITLE_SCREEN_H_INCLUDED
 
+//#include <ncurses.h> // For LINES/COLS
 #include <vector>
-#include <ncurses.h> // For LINES/COLS
-#include <iostream>
 #include <string>
 
 #include "globals.h"
-#include "output.h"
 
 class Menu
 {

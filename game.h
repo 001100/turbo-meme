@@ -4,11 +4,8 @@
 #include <ncurses.h>
 
 #include "globals.h"
-//#include "field.h"
-//#include "player.h"
-
-class Field;
-class Player;
+#include "field.h"
+#include "player.h"
 
 // Global Field and Player pointers
 extern Field* FIELD;

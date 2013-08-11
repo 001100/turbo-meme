@@ -3,15 +3,11 @@
 
 #include <string>
 #include <vector>
-#include "ncurses.h"
+//#include "ncurses.h"
 
 #include "globals.h"
-#include "output.h"
 
-// TODO: Log have unrestricted storage - bad for memory.
-
-//extern WINDOW* LOG_WIN;
-//extern WINDOW* FULL_WIN;
+// TODO: Log has unrestricted storage - bad for memory.
 
 class Log
 {
