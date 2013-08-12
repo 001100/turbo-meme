@@ -9,18 +9,17 @@
 #include "field.h"
 #include "player.h"
 #include "log.h"
+//#include "title_screen.h"
 
-void KeyPresses()
+static bool KeyCheck = false;
+static int pressedKey;
+
+void MainScreenKeys()
 {
-    bool KeyCheck = false;
-
-    do {
-    int pressedKey = getch();
-    KeyCheck = false;
     switch (pressedKey)
-    {
+        {
         // Exit key
-        case 'q': exit(0);
+        case 'q': GAME->SetQuitStatus(true); break;
         // Movement keys
         case 'u': PLAYER->TileMovement(-1, 0); break;
         case 'm': PLAYER->TileMovement( 1, 0); break;
@@ -34,6 +33,34 @@ void KeyPresses()
         default:
             KeyCheck = true;
             break;
+        }
+}
+
+void TitleScreenKeys()
+{
+    switch (pressedKey)
+        {
+        // Use action for coresponding selection
+        case '\n': TitleScreenActions(); break;
+        // Change selected menu position.
+        case KEY_UP:   GAME->TitleScreenMenu.SetSelection(KEY_UP);   break;
+        case KEY_DOWN: GAME->TitleScreenMenu.SetSelection(KEY_DOWN); break;
+        // If no proper key inputed.
+        default:
+            KeyCheck = true;
+            break;
+        }
+}
+
+void KeyPresses(sType screen)
+{
+do {
+    pressedKey = getch();
+    KeyCheck = false;
+
+    switch (screen) {
+        case MAIN_SCR:  MainScreenKeys();  break;
+        case TITLE_SCR: TitleScreenKeys(); break;
     }
-    } while (KeyCheck);
+} while (KeyCheck);
 }

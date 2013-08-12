@@ -10,7 +10,7 @@
 //#include "player.h"
 #include "keyboard_input.h"
 #include "log.h"
-#include "title_screen.h"
+//#include "title_screen.h"
 
 #include "output.h"
 
@@ -26,41 +26,31 @@ int main()
     noecho();               // Disable echoing keypressings.
     curs_set(0);            // Disable cursor.
 
-    Game* g = new Game;
+    GAME = new Game;
 
-    Menu TitleScreenMenu;
-    TitleScreenMenu.AddMenuElement("New Game");
-    TitleScreenMenu.AddMenuElement("Load Game");
-    TitleScreenMenu.AddMenuElement("Exit");
-
+    do {
+    GAME->TitleScreenMenu.DrawMenu();
+    KeyPresses(TITLE_SCR);
+    } while (!(GAME->GetStartStatus()));
 
     // Main loop.
-    bool exitStatus = false;
-    do
-    {
-
-    TitleScreenMenu.DrawMenu();
-
-    while (!exitStatus)
+    while (!(GAME->GetQuitStatus()))
     {
         FIELD->DrawField();
         Log::Read(8);
         PrintCurrentPosition();
 
-        //wrefresh(MAIN_WIN);
-        //wrefresh(LOG_WIN);
         wnoutrefresh(MAIN_WIN);
         wnoutrefresh(LOG_WIN);
         doupdate();
 
-        KeyPresses();
+        KeyPresses(MAIN_SCR);
 
         wclear(MAIN_WIN);
         wclear(LOG_WIN);
     }
-    } while (!exitStatus);
 
-    delete g;
+    delete GAME;
 
     // Ncurses end.
     endwin();
