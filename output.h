@@ -2,6 +2,10 @@
 #define OUTPUT_H
 
 void InitWindows();
-void PrintCurrentPosition();
+void DrawInfoWin();
+void IsTerminalResized();
+int DrawField();
+int SetOffset(int y, int x);
+int CheckFieldToScreenSize(int& y, int& x);
 
 #endif // OUTPUT_H

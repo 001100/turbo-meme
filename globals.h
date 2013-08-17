@@ -3,7 +3,8 @@
 
 #include <ncurses.h>
 
-extern WINDOW* SomeWindow;
+// Debug macross
+#define _DBG false
 
 // Field size.
 extern const int g_WIDTH;// = 11;
@@ -22,5 +23,6 @@ enum sType {
 extern WINDOW* MAIN_WIN;
 extern WINDOW* LOG_WIN;
 extern WINDOW* FULL_WIN;
+extern WINDOW* INFO_WIN;
 
 #endif // GLOBALS_H_INCLUDED

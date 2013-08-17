@@ -9,7 +9,7 @@
 #include "field.h"
 #include "player.h"
 #include "log.h"
-//#include "title_screen.h"
+#include "output.h"
 
 static bool KeyCheck = false;
 static int pressedKey;
@@ -29,6 +29,11 @@ void MainScreenKeys()
         case 'p': FIELD->DrawPassabilityField(); break;
         // Display fullscreen log.
         case 'l': Log::FullscreenRead(); break;
+        // Camera movement
+        case KEY_UP:    SetOffset(-1, 0); break;
+        case KEY_DOWN:  SetOffset( 1, 0); break;
+        case KEY_LEFT:  SetOffset( 0,-1); break;
+        case KEY_RIGHT: SetOffset( 0, 1); break;
         // If no proper key inputed.
         default:
             KeyCheck = true;

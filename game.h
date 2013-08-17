@@ -27,6 +27,8 @@ class Game
         void SetStartStatus(bool startGame){ _startGame = startGame; };
         void SetQuitStatus(bool quitGame){ _quitGame = quitGame; };
 
+        void InitGameStart();
+
     protected:
     private:
 

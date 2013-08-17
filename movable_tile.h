@@ -3,6 +3,12 @@
 
 #include "tile.h"
 
+enum tileAxis
+{
+    X,
+    Y
+};
+
 class MovableTile: public Tile
 {
     private:
@@ -14,10 +20,10 @@ class MovableTile: public Tile
         virtual ~MovableTile();
 
         //Getters
-        int& GetPosition(char axis);
+        int& GetPosition(tileAxis axis);
 
         //Setters
-        void SetPosition(char axis, int value);
+        void SetPosition(tileAxis axis, int value);
         void TileMovement(int y, int x);
 };
 

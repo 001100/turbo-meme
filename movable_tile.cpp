@@ -16,20 +16,20 @@ MovableTile::~MovableTile()
     //dtor
 }
 
-int& MovableTile::GetPosition(char axis)
+int& MovableTile::GetPosition(tileAxis axis)
 {
-    assert(axis != 'y' || axis != 'x');
-    if (axis == 'y')
+    assert(axis != Y || axis != X);
+    if (axis == Y)
         return m_Y;
     //if (axis == 'x')          // Simplification, otherwise - warning
         return m_X;
 }
 
-void MovableTile::SetPosition(char axis, int positionDelta)
+void MovableTile::SetPosition(tileAxis axis, int positionDelta)
 {
-    assert(axis != 'y' || axis != 'x');
-    if (axis == 'y')
+    assert(axis != Y || axis != X);
+    if (axis == Y)
         m_Y += positionDelta;
-    if (axis == 'x')
+    if (axis == X)
         m_X += positionDelta;
 }

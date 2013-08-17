@@ -1,8 +1,8 @@
 #include "globals.h"
 
 // Field size.
-const int g_WIDTH = 11;
-const int g_HEIGHT = 11;
+const int g_WIDTH = 60;
+const int g_HEIGHT = g_WIDTH;
 
 // Field area.
 const int g_AREA = g_WIDTH*g_HEIGHT;
@@ -11,3 +11,4 @@ const int g_AREA = g_WIDTH*g_HEIGHT;
 WINDOW* MAIN_WIN = NULL;
 WINDOW* LOG_WIN  = NULL;
 WINDOW* FULL_WIN = NULL;
+WINDOW* INFO_WIN = NULL;

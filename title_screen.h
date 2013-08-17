@@ -1,10 +1,8 @@
 #ifndef TITLE_SCREEN_H_INCLUDED
 #define TITLE_SCREEN_H_INCLUDED
 
-//#include <ncurses.h> // For LINES/COLS
 #include <vector>
 #include <string>
-
 
 class Menu
 {

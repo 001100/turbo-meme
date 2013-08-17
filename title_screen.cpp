@@ -1,5 +1,6 @@
 #include "title_screen.h"
 
+#include <ncurses.h>
 #include <iomanip>
 
 #include "globals.h"
@@ -60,7 +61,9 @@ void Menu::DrawMenu()
 void TitleScreenActions()
 {
     switch (GAME->TitleScreenMenu.GetSelection()) {
-    case 0: GAME->SetStartStatus(true); break;
+    case 0:
+        GAME->InitGameStart();
+        break;
     case 1:
         wprintw(FULL_WIN, "Load is not currently available!");
         wrefresh(FULL_WIN);

@@ -7,10 +7,10 @@
 Player::Player() :
     MovableTile(g_HEIGHT / 2, g_WIDTH / 2), m_playerTile(this)
 {
-    SetID(GetPosition('y')*GetPosition('x'));
+    SetID(GetPosition(Y)*GetPosition(X));
     SetTileChar("@");
 
-    (*FIELD)(GetPosition('y'), GetPosition('x')) = *m_playerTile;
+    (*FIELD)(GetPosition(Y), GetPosition(X)) = *m_playerTile;
 }
 
 Player::~Player()

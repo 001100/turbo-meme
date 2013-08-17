@@ -5,6 +5,7 @@
 #include <cassert>
 #include <unistd.h> // for usleep
 
+#include "output.h"
 #include "log.h"    //dbug
 
 Field::Field():
@@ -14,17 +15,8 @@ Field::Field():
     for (int NumOfTiles=0; NumOfTiles < g_AREA; ++NumOfTiles)
     {
         m_FieldData.push_back(Tile(NumOfTiles));
-        //std::cout << "pushed element #: " << NumOfTiles << std::endl;
     }
-    FillField();            //Fills initial field
-    //getch();
-    //usleep(3000000);
-
-/*
-    std::cout << "size: " << m_FieldData.size() << std::endl;
-    std::cout << "capacity: " << m_FieldData.capacity() << std::endl;
-    std::cout << "max_size: " << m_FieldData.max_size() << std::endl;
-*/
+    //FillField();            //Fills initial field
 }
 
 Field::~Field()
@@ -40,8 +32,10 @@ Tile& Field::operator()(int height, int width)
     return m_FieldData[height*g_HEIGHT+width]; // If HEIGHT == WIDTH
 }
 
-void Field::DebugDraw(int y, int x)
+int Field::DebugDraw(int y, int x)
 {
+    if (!_DBG)
+        return 0;
     DrawField();
     std::string logDbgMsg = "Changed tile to \"" + F(y, x).GetTileChar() +
         "\"" " at possition y(" + std::to_string(y) + "), x(" +
@@ -56,6 +50,8 @@ void Field::DebugDraw(int y, int x)
     usleep(50000);
     wclear(MAIN_WIN);
     wclear(LOG_WIN);
+
+    return 0;
 }
 
 void Field::FillField()
@@ -118,18 +114,7 @@ void Field::FillField()
     }
 }
 
-void Field::DrawField()
-{
-    for (int height = 0; height < g_HEIGHT; ++height)
-    {
-        for (int width = 0; width < g_WIDTH; ++width)
-        {
-            wprintw(MAIN_WIN, (F(height, width).GetTileChar()).c_str());
-        }
-        wprintw(MAIN_WIN, "\n");
-    }
-    //wrefresh(MAIN_WIN);
-}
+
 
 void Field::DrawPassabilityField()
 {

@@ -4,13 +4,9 @@
 
 #include "globals.h"
 #include "game.h"
-#include "field.h"
-//#include "tile.h"
-//#include "movable_tile.h"
-//#include "player.h"
+//#include "field.h"
 #include "keyboard_input.h"
 #include "log.h"
-//#include "title_screen.h"
 
 #include "output.h"
 
@@ -28,26 +24,32 @@ int main()
 
     GAME = new Game;
 
-    do {
-    GAME->TitleScreenMenu.DrawMenu();
-    KeyPresses(TITLE_SCR);
-    } while (!(GAME->GetStartStatus()));
+
 
     // Main loop.
     while (!(GAME->GetQuitStatus()))
     {
-        FIELD->DrawField();
+
+        while (!(GAME->GetStartStatus()))
+        {
+            GAME->TitleScreenMenu.DrawMenu();
+            KeyPresses(TITLE_SCR);
+        }
+        IsTerminalResized();
+        DrawField();
         Log::Read(8);
-        PrintCurrentPosition();
+        DrawInfoWin();
 
         wnoutrefresh(MAIN_WIN);
         wnoutrefresh(LOG_WIN);
+        wnoutrefresh(INFO_WIN);
         doupdate();
 
         KeyPresses(MAIN_SCR);
 
         wclear(MAIN_WIN);
         wclear(LOG_WIN);
+        wclear(INFO_WIN);
     }
 
     delete GAME;
