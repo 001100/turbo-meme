@@ -6,6 +6,6 @@ void DrawInfoWin();
 void IsTerminalResized();
 int DrawField();
 int SetOffset(int y, int x);
-int CheckFieldToScreenSize(int& y, int& x);
+void CheckFieldToScreenSize(int& maxY, int& maxX);
 
 #endif // OUTPUT_H

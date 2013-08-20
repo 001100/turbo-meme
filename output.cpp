@@ -62,42 +62,30 @@ void DrawInfoWin()
     mvwprintw(INFO_WIN, 4, 4, std::to_string(offsetX).c_str());
 }
 
-int CheckFieldToScreenSize(int& y, int& x)
+void CheckFieldToScreenSize(int& maxY, int& maxX)
 {
-    // WTF
-    if (g_HEIGHT <= MAIN_WIN->_maxy && g_WIDTH <= MAIN_WIN->_maxx) {
-        y = g_HEIGHT;
-        x = g_WIDTH;
+    // Well, this is somehow better.
+    // For max height.
+    // If Field size is bigger than main window size...
+    if (g_HEIGHT > MAIN_WIN->_maxy) {
+        // set base maxY to that of main window.
+        maxY = MAIN_WIN->_maxy;
+            // And this is basically for sudden terminal resizes
+        if (maxY + offsetY > g_HEIGHT)
+            offsetY -=  (maxY + offsetY) - g_HEIGHT;
+    } else {
+        // And if it is smaler then set base maxY to it and 0 offset
+        maxY = g_HEIGHT;
         offsetY = 0;
+    }
+    if (g_WIDTH > MAIN_WIN->_maxx) {
+        maxX = MAIN_WIN->_maxx;
+        if (maxX + offsetX > g_WIDTH)
+            offsetX -= (maxX + offsetX) - g_WIDTH;
+    } else {
+        maxX = g_WIDTH;
         offsetX = 0;
-        return 0;
     }
-    if (g_HEIGHT > MAIN_WIN->_maxy && g_WIDTH > MAIN_WIN->_maxx) {
-        y = MAIN_WIN->_maxy;
-        if (y + offsetY > g_HEIGHT)
-            offsetY -=  (y + offsetY) - g_HEIGHT;
-        x = MAIN_WIN->_maxx;
-        if (x + offsetX > g_WIDTH)
-            offsetX -= (x + offsetX) - g_WIDTH;
-        return 0;
-    }
-    if (g_HEIGHT > MAIN_WIN->_maxy && g_WIDTH <= MAIN_WIN->_maxx) {
-        y = MAIN_WIN->_maxy;
-        if (y + offsetY > g_HEIGHT)
-            offsetY -= (y + offsetY) - g_HEIGHT;;
-        x = g_WIDTH;
-        offsetX = 0;
-        return 0;
-    }
-    if (g_WIDTH > MAIN_WIN->_maxx && g_HEIGHT <= MAIN_WIN->_maxy) {
-        y = g_HEIGHT;
-        offsetY = 0;
-        x = MAIN_WIN->_maxx;
-        if (x + offsetX > g_WIDTH)
-            offsetX -= (x + offsetX) - g_WIDTH;
-        return 0;
-    }
-    return 1;
 }
 
 int DrawField()
