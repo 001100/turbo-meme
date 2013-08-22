@@ -24,8 +24,6 @@ int main()
 
     GAME = new Game;
 
-
-
     // Main loop.
     while (!(GAME->GetQuitStatus()))
     {
@@ -36,6 +34,7 @@ int main()
             KeyPresses(TITLE_SCR);
         }
         IsTerminalResized();
+        CenterOnPlayer();
         DrawField();
         Log::Read(8);
         DrawInfoWin();

@@ -22,7 +22,7 @@ class Field
         // Fills initial field
         void FillField();
         //Public member functions
-        void DrawPassabilityField();    // For debug purposes.
+
         // Access to tiles via 2d coordinates (y,x)
         Tile& operator()(int height, int width);
         // For debug - draws every field tile when fill field.

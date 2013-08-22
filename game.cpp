@@ -15,10 +15,6 @@ Game::Game(): _startGame(false), _quitGame(false)
     // Windows initialization.
     InitWindows();
 
-    // Field and Player pointer initialization
-    FIELD = new Field;
-    //PLAYER = new Player;
-
     TitleScreenMenu.AddMenuElement("New Game"); //0
     TitleScreenMenu.AddMenuElement("Load Game");//1
     TitleScreenMenu.AddMenuElement("Exit");     //2
@@ -35,6 +31,7 @@ void Game::InitGameStart()
     SetStartStatus(true);
         wclear(FULL_WIN);
         wrefresh(FULL_WIN);
+    FIELD = new Field;
     FIELD->FillField();
     PLAYER = new Player;
 }

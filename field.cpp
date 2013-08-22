@@ -113,24 +113,3 @@ void Field::FillField()
         }
     }
 }
-
-
-
-void Field::DrawPassabilityField()
-{
-    wclear(MAIN_WIN);
-    for (int height = 0; height < g_HEIGHT; ++height)
-    {
-        for (int width = 0; width < g_WIDTH; ++width)
-        {
-            if (F(height, width).IsPassable())
-                wprintw(MAIN_WIN, "1");
-            else
-                wprintw(MAIN_WIN, "0");
-
-        }
-        wprintw(MAIN_WIN, "\n");
-    }
-    wrefresh(MAIN_WIN);
-    getch();
-}

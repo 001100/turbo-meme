@@ -26,7 +26,7 @@ void MainScreenKeys()
         case 'h': PLAYER->TileMovement( 0,-1); break;
         case 'k': PLAYER->TileMovement( 0, 1); break;
         // Draw tile passability map.
-        case 'p': FIELD->DrawPassabilityField(); break;
+        case 'p': DrawPassabilityField(); break;
         // Display fullscreen log.
         case 'l': Log::FullscreenRead(); break;
         // Camera movement

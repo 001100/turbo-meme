@@ -30,6 +30,9 @@ void Log::Write(const char* text)
 
 void Log::FullscreenRead()
 {
+    wclear(FULL_WIN);
+    wrefresh(FULL_WIN);
+
     Read(LINES, FULL_WIN);
     wrefresh(FULL_WIN);
 

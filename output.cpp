@@ -37,6 +37,15 @@ void IsTerminalResized()
 {
     if (_LINES != LINES || _COLS != COLS)
     {
+        while (LINES < 24 || COLS < 80)
+        {
+            wprintw(FULL_WIN, "Minimum screen size is 24 x 80!");
+            wrefresh(FULL_WIN);
+            timeout(3000);
+            getch();
+            timeout(-1);
+            wclear(FULL_WIN);
+        }
         delwin(MAIN_WIN);
         delwin(LOG_WIN);
         delwin(FULL_WIN);
@@ -88,7 +97,7 @@ void CheckFieldToScreenSize(int& maxY, int& maxX)
     }
 }
 
-int DrawField()
+void DrawField()
 {
     int maxY = 0;
     int maxX = 0;
@@ -103,18 +112,49 @@ int DrawField()
         }
         wprintw(MAIN_WIN, "\n");
     }
-
-    return 1;
 }
 
-int SetOffset(int y, int x)
+void SetOffset(int y, int x)
 {
-    if (offsetY == 0 && y == -1)
-        return 0;
-    if (offsetX == 0 && x == -1)
-        return 0;
+    if (offsetY + y < 0)
+        offsetY = 0;
+    else
+        offsetY += y;
 
-    offsetY += y;
-    offsetX += x;
-    return 0;
+    if (offsetX + x < 0)
+        offsetX = 0;
+    else
+        offsetX += x;
+}
+
+void DrawPassabilityField()
+{
+    wclear(MAIN_WIN);
+    int maxY = 0;
+    int maxX = 0;
+
+    CheckFieldToScreenSize(maxY, maxX);
+
+    for (int height = 0 + offsetY; height < maxY + offsetY; ++height)
+    {
+        for (int width = 0 + offsetX; width < maxX + offsetX; ++width)
+        {
+            if ((*FIELD)(height, width).IsPassable())
+                wprintw(MAIN_WIN, "1");
+            else
+                wprintw(MAIN_WIN, "0");
+
+        }
+        wprintw(MAIN_WIN, "\n");
+    }
+    wrefresh(MAIN_WIN);
+    getch();
+}
+
+void CenterOnPlayer()
+{
+    offsetY = 0;
+    offsetX = 0;
+    SetOffset(PLAYER->GetPosition(Y) - MAIN_WIN->_maxy/2,
+              PLAYER->GetPosition(X) - MAIN_WIN->_maxx/2);
 }

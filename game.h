@@ -18,7 +18,7 @@ class Game
     public:
         Menu TitleScreenMenu;
 
-        Game();
+        Game();     // Mainly sets main menu screen.
         ~Game();
 
         bool GetStartStatus(){ return _startGame; };
@@ -27,6 +27,7 @@ class Game
         void SetStartStatus(bool startGame){ _startGame = startGame; };
         void SetQuitStatus(bool quitGame){ _quitGame = quitGame; };
 
+        // Creates most of the game, generates field.
         void InitGameStart();
 
     protected:
