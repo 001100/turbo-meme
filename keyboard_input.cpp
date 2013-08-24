@@ -30,6 +30,7 @@ void MainScreenKeys()
         // Display fullscreen log.
         case 'l': Log::FullscreenRead(); break;
         // Camera movement
+        case 'x':     SetFreeCameraMod(); break;
         case KEY_UP:    SetOffset(-1, 0); break;
         case KEY_DOWN:  SetOffset( 1, 0); break;
         case KEY_LEFT:  SetOffset( 0,-1); break;

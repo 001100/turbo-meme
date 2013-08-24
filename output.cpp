@@ -16,6 +16,9 @@ static int _COLS = 0;
 static int offsetY = 0;
 static int offsetX = 0;
 
+// For free camera mod
+static bool freeCameraMod = false;
+
 void InitWindows()                                  // +------+--+
 {                                                   // |      |  |
     MAIN_WIN = newwin(LINES - 8, COLS - 35, 0, 0);  // |      |  |
@@ -58,13 +61,16 @@ void IsTerminalResized()
 void DrawInfoWin()
 {
     mvwprintw(INFO_WIN, 0, 0, "Your current position is: ");
-    mvwprintw(INFO_WIN, 0, 27, std::to_string(PLAYER->GetPosition(Y)).c_str());
-    mvwprintw(INFO_WIN, 0, 31, std::to_string(PLAYER->GetPosition(X)).c_str());
+    mvwprintw(INFO_WIN, 0, 26, std::to_string(PLAYER->GetPosition(Y)).c_str());
+    mvwprintw(INFO_WIN, 0, 30, std::to_string(PLAYER->GetPosition(X)).c_str());
 
-    mvwprintw(INFO_WIN, 1, 0, std::to_string(MAIN_WIN->_maxy).c_str());
-    mvwprintw(INFO_WIN, 1, 3, std::to_string(MAIN_WIN->_maxx).c_str());
-    mvwprintw(INFO_WIN, 2, 0, std::to_string(_LINES).c_str());
-    mvwprintw(INFO_WIN, 2, 3, std::to_string(_COLS).c_str());
+    mvwprintw(INFO_WIN, 1, 0, "Field win size(y, x): ");
+    mvwprintw(INFO_WIN, 1, 22, std::to_string(MAIN_WIN->_maxy).c_str());
+    mvwprintw(INFO_WIN, 1, 26, std::to_string(MAIN_WIN->_maxx).c_str());
+
+    mvwprintw(INFO_WIN, 2, 0, "Whole win size(y, x): ");
+    mvwprintw(INFO_WIN, 2, 22, std::to_string(_LINES).c_str());
+    mvwprintw(INFO_WIN, 2, 26, std::to_string(_COLS).c_str());
 
     mvwprintw(INFO_WIN, 3, 0, "Offsets(y,x)");
     mvwprintw(INFO_WIN, 4, 0, std::to_string(offsetY).c_str());
@@ -83,10 +89,11 @@ void CheckFieldToScreenSize(int& maxY, int& maxX)
         if (maxY + offsetY > g_HEIGHT)
             offsetY -=  (maxY + offsetY) - g_HEIGHT;
     } else {
-        // And if it is smaler then set base maxY to it and 0 offset
+        // And if it is smaler then set base maxY to it and zero offset
         maxY = g_HEIGHT;
         offsetY = 0;
     }
+    // Same for x.
     if (g_WIDTH > MAIN_WIN->_maxx) {
         maxX = MAIN_WIN->_maxx;
         if (maxX + offsetX > g_WIDTH)
@@ -116,11 +123,11 @@ void DrawField()
 
 void SetOffset(int y, int x)
 {
-    if (offsetY + y < 0)
-        offsetY = 0;
-    else
-        offsetY += y;
-
+    if (offsetY + y < 0)        // Here we check
+        offsetY = 0;            // +--------------
+    else                        // |   top
+        offsetY += y;           // |  and left
+                                // |     offsets.
     if (offsetX + x < 0)
         offsetX = 0;
     else
@@ -153,8 +160,16 @@ void DrawPassabilityField()
 
 void CenterOnPlayer()
 {
+    if (!freeCameraMod)
+    {
     offsetY = 0;
     offsetX = 0;
     SetOffset(PLAYER->GetPosition(Y) - MAIN_WIN->_maxy/2,
               PLAYER->GetPosition(X) - MAIN_WIN->_maxx/2);
+    }
+}
+
+void SetFreeCameraMod()
+{
+    freeCameraMod = !freeCameraMod;
 }

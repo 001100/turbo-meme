@@ -9,5 +9,6 @@ void SetOffset(int y, int x);
 void CheckFieldToScreenSize(int& maxY, int& maxX);
 void DrawPassabilityField();
 void CenterOnPlayer();
+void SetFreeCameraMod();
 
 #endif // OUTPUT_H
