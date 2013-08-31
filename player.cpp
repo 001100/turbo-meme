@@ -5,12 +5,12 @@
 #include "field.h"
 
 Player::Player() :
-    MovableTile(g_HEIGHT / 2, g_WIDTH / 2), m_playerTile(this)
+    MovableTile(g_HEIGHT / 2, g_WIDTH / 2)
 {
     SetID(GetPosition(Y)*GetPosition(X));
     SetTileChar("@");
 
-    (*FIELD)(GetPosition(Y), GetPosition(X)) = *m_playerTile;
+    (*FIELD)(GetPosition(Y), GetPosition(X)) = *this;
 }
 
 Player::~Player()

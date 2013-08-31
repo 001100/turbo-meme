@@ -115,9 +115,11 @@ void DrawField()
     {
         for (int width = 0 + offsetX; width < maxX + offsetX; ++width)
         {
-            wprintw(MAIN_WIN, ((*FIELD)(height, width).GetTileChar()).c_str());
+            //wprintw(MAIN_WIN, ((*FIELD)(height, width).GetTileChar()).c_str());
+            mvwprintw(MAIN_WIN, height - offsetY, width - offsetX,
+                            ((*FIELD)(height, width).GetTileChar()).c_str());
         }
-        wprintw(MAIN_WIN, "\n");
+        //wprintw(MAIN_WIN, "\n");
     }
 }
 
@@ -125,9 +127,9 @@ void SetOffset(int y, int x)
 {
     if (offsetY + y < 0)        // Here we check
         offsetY = 0;            // +--------------
-    else                        // |   top
-        offsetY += y;           // |  and left
-                                // |     offsets.
+    else                        // | TOP and LEFT offsets.
+        offsetY += y;           // | because this borders won't change.
+                                // |
     if (offsetX + x < 0)
         offsetX = 0;
     else
@@ -147,12 +149,13 @@ void DrawPassabilityField()
         for (int width = 0 + offsetX; width < maxX + offsetX; ++width)
         {
             if ((*FIELD)(height, width).IsPassable())
-                wprintw(MAIN_WIN, "1");
+                //wprintw(MAIN_WIN, "1");
+                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "1");
             else
-                wprintw(MAIN_WIN, "0");
+                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "0");
 
         }
-        wprintw(MAIN_WIN, "\n");
+        //wprintw(MAIN_WIN, "\n");
     }
     wrefresh(MAIN_WIN);
     getch();

@@ -6,7 +6,6 @@
 class Player : public MovableTile
 {
     private:
-        Tile *m_playerTile;
 
     protected:
     public:
