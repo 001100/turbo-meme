@@ -7,15 +7,15 @@
 #define _DBG false
 
 // Field size.
-extern const int g_WIDTH;// = 11;
-extern const int g_HEIGHT;// = 11;
+extern const int g_WIDTH;
+extern const int g_HEIGHT;
 
 // Field area.
 extern const int g_AREA;// = g_WIDTH*g_HEIGHT;
 
 // Ingame screens.
 enum sType {
-    MAIN_SCR,       // MAIN+LOG windows
+    MAIN_SCR,       // MAIN+LOG+INFO windows
     TITLE_SCR
 };
 
@@ -24,5 +24,14 @@ extern WINDOW* MAIN_WIN;
 extern WINDOW* LOG_WIN;
 extern WINDOW* FULL_WIN;
 extern WINDOW* INFO_WIN;
+
+// Colors
+enum Color {
+    NO_COLOR,
+    RED_ON_BLACK,
+    WHITE_ON_BLACK,
+    BLUE_ON_BLACK,
+    GREEN_ON_BLACK
+};
 
 #endif // GLOBALS_H_INCLUDED

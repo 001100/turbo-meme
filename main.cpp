@@ -49,6 +49,10 @@ int main()
         wclear(MAIN_WIN);
         wclear(LOG_WIN);
         wclear(INFO_WIN);
+
+        wstandend(MAIN_WIN);
+        wstandend(LOG_WIN);
+        wstandend(INFO_WIN);
     }
 
     delete GAME;

@@ -19,14 +19,12 @@ class Field
         //Getters
         std::vector<Tile>& GetFieldData(){ return m_FieldData; }
         Field& GetField(){ return *this; }
+
         // Fills initial field
         void FillField();
-        //Public member functions
 
         // Access to tiles via 2d coordinates (y,x)
         Tile& operator()(int height, int width);
-        // For debug - draws every field tile when fill field.
-        int DebugDraw(int y, int x);
 };
 
 #endif // FIELD_INCLUDED

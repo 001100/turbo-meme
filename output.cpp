@@ -7,6 +7,7 @@
 #include "globals.h"
 #include "player.h"
 #include "field.h"
+#include "log.h"    //dbug
 
 // For IsTerminalResized()
 static int _LINES = 0;
@@ -20,13 +21,13 @@ static int offsetX = 0;
 static bool freeCameraMod = false;
 
 void InitWindows()                                  // +------+--+
-{                                                   // |      |  |
-    MAIN_WIN = newwin(LINES - 8, COLS - 35, 0, 0);  // |      |  |
+{                                                   // | MAIN |IN|
+    MAIN_WIN = newwin(LINES - 8, COLS - 35, 0, 0);  // |      |FO|
     LOG_WIN  = newwin(8, COLS, LINES - 8, 0);       // +------+--+
-    FULL_WIN = newwin(LINES, COLS, 0, 0);           // |         |
+    FULL_WIN = newwin(LINES, COLS, 0, 0);           // |   LOG   |
     INFO_WIN = newwin(LINES - 8, 35, 0, COLS - 35); // +---------+
 
-    // Remember what values terminal had when initialaized for latter check.
+    // Remember what values terminal had when initialaized, for IsTerminalResized().
     _LINES = LINES;
     _COLS = COLS;
 
@@ -34,6 +35,16 @@ void InitWindows()                                  // +------+--+
     timeout(30);
     getch();
     timeout(-1);
+}
+
+void InitColors()
+{
+    start_color();
+
+    init_pair(RED_ON_BLACK, COLOR_RED, COLOR_BLACK);
+    init_pair(WHITE_ON_BLACK, COLOR_WHITE, COLOR_BLACK);
+    init_pair(BLUE_ON_BLACK, COLOR_BLUE, COLOR_BLACK);
+    init_pair(GREEN_ON_BLACK, COLOR_GREEN, COLOR_BLACK);
 }
 
 void IsTerminalResized()
@@ -75,6 +86,19 @@ void DrawInfoWin()
     mvwprintw(INFO_WIN, 3, 0, "Offsets(y,x)");
     mvwprintw(INFO_WIN, 4, 0, std::to_string(offsetY).c_str());
     mvwprintw(INFO_WIN, 4, 4, std::to_string(offsetX).c_str());
+
+    mvwprintw(INFO_WIN, 5, 0, "Color test:");
+    if (has_colors() == FALSE) {
+        wattron(INFO_WIN, COLOR_PAIR(RED_ON_BLACK) | A_BOLD);
+        mvwprintw(INFO_WIN, 5, 12, "No");
+        wattroff(INFO_WIN, COLOR_PAIR(RED_ON_BLACK) | A_BOLD);
+        }
+    else {
+        wattron(INFO_WIN, COLOR_PAIR(RED_ON_BLACK) | A_BOLD);
+        mvwprintw(INFO_WIN, 5, 12, "Yes");
+        wattroff(INFO_WIN, COLOR_PAIR(RED_ON_BLACK) | A_BOLD);
+    }
+
 }
 
 void CheckFieldToScreenSize(int& maxY, int& maxX)
@@ -115,11 +139,11 @@ void DrawField()
     {
         for (int width = 0 + offsetX; width < maxX + offsetX; ++width)
         {
-            //wprintw(MAIN_WIN, ((*FIELD)(height, width).GetTileChar()).c_str());
+            wattron(MAIN_WIN, COLOR_PAIR((*FIELD)(height, width).GetColor()));
             mvwprintw(MAIN_WIN, height - offsetY, width - offsetX,
                             ((*FIELD)(height, width).GetTileChar()).c_str());
+            wattroff(MAIN_WIN, COLOR_PAIR((*FIELD)(height, width).GetColor()));
         }
-        //wprintw(MAIN_WIN, "\n");
     }
 }
 
@@ -148,14 +172,18 @@ void DrawPassabilityField()
     {
         for (int width = 0 + offsetX; width < maxX + offsetX; ++width)
         {
-            if ((*FIELD)(height, width).IsPassable())
-                //wprintw(MAIN_WIN, "1");
-                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "1");
-            else
-                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "0");
+            if ((*FIELD)(height, width).IsPassable()) {
+                wattron(MAIN_WIN, COLOR_PAIR(GREEN_ON_BLACK));
+                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "█");
+                wattroff(MAIN_WIN, COLOR_PAIR(GREEN_ON_BLACK));
+            }
+            else {
+                wattron(MAIN_WIN, COLOR_PAIR(RED_ON_BLACK));
+                mvwprintw(MAIN_WIN, height - offsetY, width - offsetX, "█");
+                wattroff(MAIN_WIN, COLOR_PAIR(RED_ON_BLACK));
+            }
 
         }
-        //wprintw(MAIN_WIN, "\n");
     }
     wrefresh(MAIN_WIN);
     getch();
@@ -175,4 +203,26 @@ void CenterOnPlayer()
 void SetFreeCameraMod()
 {
     freeCameraMod = !freeCameraMod;
+}
+
+int DebugDraw(int y, int x)
+{
+    if (!_DBG)
+        return 0;
+    DrawField();
+    std::string logDbgMsg = "Changed tile to \"" + (*FIELD)(y, x).GetTileChar() +
+        "\"" " at possition y(" + std::to_string(y) + "), x(" +
+        std::to_string(x) + "), Tile ID - " + std::to_string((*FIELD)(y, x).GetID()) + ".";
+
+    Log::Write(logDbgMsg.c_str());
+    Log::Read(8);
+    wnoutrefresh(MAIN_WIN);
+    wnoutrefresh(LOG_WIN);
+    doupdate();
+
+    usleep(50000);
+    wclear(MAIN_WIN);
+    wclear(LOG_WIN);
+
+    return 0;
 }

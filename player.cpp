@@ -9,6 +9,7 @@ Player::Player() :
 {
     SetID(GetPosition(Y)*GetPosition(X));
     SetTileChar("@");
+    SetColor(RED_ON_BLACK);
 
     (*FIELD)(GetPosition(Y), GetPosition(X)) = *this;
 }

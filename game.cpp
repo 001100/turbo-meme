@@ -14,6 +14,7 @@ Game::Game(): _startGame(false), _quitGame(false)
 {
     // Windows initialization.
     InitWindows();
+    InitColors();
 
     TitleScreenMenu.AddMenuElement("New Game"); //0
     TitleScreenMenu.AddMenuElement("Load Game");//1

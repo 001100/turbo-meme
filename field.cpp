@@ -1,12 +1,9 @@
 #include "field.h"
 
 #include <ncurses.h>
-#include <iomanip>  //dbug
 #include <cassert>
-#include <unistd.h> // for usleep
 
 #include "output.h"
-#include "log.h"    //dbug
 
 Field::Field():
     F(*this)
@@ -30,28 +27,6 @@ Tile& Field::operator()(int height, int width)
     assert(width >= 0 && width < g_WIDTH);
 
     return m_FieldData[height*g_HEIGHT+width]; // If HEIGHT == WIDTH
-}
-
-int Field::DebugDraw(int y, int x)
-{
-    if (!_DBG)
-        return 0;
-    DrawField();
-    std::string logDbgMsg = "Changed tile to \"" + F(y, x).GetTileChar() +
-        "\"" " at possition y(" + std::to_string(y) + "), x(" +
-        std::to_string(x) + "), Tile ID - " + std::to_string(F(y, x).GetID()) + ".";
-
-    Log::Write(logDbgMsg.c_str());
-    Log::Read(8);
-    wnoutrefresh(MAIN_WIN);
-    wnoutrefresh(LOG_WIN);
-    doupdate();
-
-    usleep(50000);
-    wclear(MAIN_WIN);
-    wclear(LOG_WIN);
-
-    return 0;
 }
 
 void Field::FillField()
@@ -103,6 +78,7 @@ void Field::FillField()
             // Special object.
             if (iii == 2 && jjj == 2) {
                 F(iii, jjj).SetTileChar("╳");
+                F(iii, jjj).SetColor(BLUE_ON_BLACK);
                 F(iii, jjj).SetTilePassability(false);
                 DebugDraw(iii, jjj);
                 continue;
