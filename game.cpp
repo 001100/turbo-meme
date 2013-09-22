@@ -36,3 +36,13 @@ void Game::InitGameStart()
     FIELD->FillField();
     PLAYER = new Player;
 }
+
+void Game::RestartGame()
+{
+    delete FIELD;
+    delete PLAYER;
+
+    FIELD = new Field;
+    FIELD->FillField();
+    PLAYER = new Player;
+}

@@ -20,6 +20,8 @@ void MainScreenKeys()
         {
         // Exit key
         case 'q': GAME->SetQuitStatus(true); break;
+        // Restart the game
+        case 'r': GAME->RestartGame(); break;
         // Movement keys
         case 'u': PLAYER->TileMovement(-1, 0); break;
         case 'm': PLAYER->TileMovement( 1, 0); break;

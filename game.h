@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "globals.h"
-#include "title_screen.h"
+#include "menu.h"
 
 class Field;
 class Player;
@@ -30,9 +30,11 @@ class Game
         // Creates most of the game, generates field.
         void InitGameStart();
 
+        // Restart the game.
+        void RestartGame();
+
     protected:
     private:
-
         bool _startGame;
         bool _quitGame;
 };

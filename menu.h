@@ -1,5 +1,5 @@
-#ifndef TITLE_SCREEN_H_INCLUDED
-#define TITLE_SCREEN_H_INCLUDED
+#ifndef MENU_H_INCLUDED
+#define MENU_H_INCLUDED
 
 #include <vector>
 #include <string>
@@ -24,4 +24,4 @@ class Menu
 
 void TitleScreenActions();
 
-#endif // TITLE_SCREEN_H_INCLUDED
+#endif // MENU_H_INCLUDED

@@ -27,11 +27,14 @@ extern WINDOW* INFO_WIN;
 
 // Colors
 enum Color {
-    NO_COLOR,
+    NO_COLOR, // Color pair in ncurses can't be zero
     RED_ON_BLACK,
     WHITE_ON_BLACK,
     BLUE_ON_BLACK,
-    GREEN_ON_BLACK
+    GREEN_ON_BLACK,
+    YELLOW_ON_BLACK,
+
+    COLOR_COUNT
 };
 
 #endif // GLOBALS_H_INCLUDED

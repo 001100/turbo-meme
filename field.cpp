@@ -75,17 +75,30 @@ void Field::FillField()
                 DebugDraw(iii, jjj);
                 continue;
             }
-            // Special object.
-            if (iii == 2 && jjj == 2) {
-                F(iii, jjj).SetTileChar("╳");
-                F(iii, jjj).SetColor(BLUE_ON_BLACK);
-                F(iii, jjj).SetTilePassability(false);
-                DebugDraw(iii, jjj);
-                continue;
-            }
             //All other floor tiles.
             F(iii, jjj).SetTileChar("+");
             F(iii, jjj).SetTilePassability(true);
+        }
+    }
+    MakeLabyrinth();
+}
+
+void Field::MakeLabyrinth()
+{
+    srand (time(NULL));
+    for (int iii = 1; iii < g_HEIGHT-1; iii++)
+    {
+        for (int jjj = 1; jjj < g_WIDTH-1; jjj++)
+        {
+        int placePercentValue = rand() % 100;
+        // 30% chance to place obstacle
+        if (placePercentValue < 30) {
+                F(iii, jjj).SetTileChar("╳");
+                // Random color
+                F(iii, jjj).SetColor(static_cast<Color>(rand() % (COLOR_COUNT - 1) + 1));
+                F(iii, jjj).SetTilePassability(false);
+                DebugDraw(iii, jjj);
+            }
         }
     }
 }

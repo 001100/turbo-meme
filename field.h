@@ -23,6 +23,9 @@ class Field
         // Fills initial field
         void FillField();
 
+        // Make labyrinth on the initial field
+        void MakeLabyrinth();
+
         // Access to tiles via 2d coordinates (y,x)
         Tile& operator()(int height, int width);
 };

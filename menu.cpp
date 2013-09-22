@@ -1,4 +1,4 @@
-#include "title_screen.h"
+#include "menu.h"
 
 #include <ncurses.h>
 #include <iomanip>

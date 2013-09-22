@@ -33,6 +33,8 @@ int main()
             GAME->TitleScreenMenu.DrawMenu();
             KeyPresses(TITLE_SCR);
         }
+        if (!(GAME->GetQuitStatus())) // For proper Exit from title menu
+        {
         IsTerminalResized();
         CenterOnPlayer();
         DrawField();
@@ -53,6 +55,7 @@ int main()
         wstandend(MAIN_WIN);
         wstandend(LOG_WIN);
         wstandend(INFO_WIN);
+        }
     }
 
     delete GAME;
