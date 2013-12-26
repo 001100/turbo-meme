@@ -25,9 +25,13 @@ class Field
 
         // Make labyrinth on the initial field
         void MakeLabyrinth();
+        int SmothWalls(int y, int x);
 
         // Access to tiles via 2d coordinates (y,x)
         Tile& operator()(int height, int width);
+
+        // Checks if given coords valid
+        bool IsInsideTheField(int y, int x);
 };
 
 #endif // FIELD_INCLUDED

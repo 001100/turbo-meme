@@ -25,6 +25,8 @@ class MovableTile: public Tile
         //Setters
         void SetPosition(tileAxis axis, int value);
         void TileMovement(int y, int x);
+
+        int CheckInitPassability(int y, int x);
 };
 
 #endif // MOVABLE_TILE_H

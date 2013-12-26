@@ -15,6 +15,7 @@
 # Code::Blocks files
 *.depend
 turbo-meme.layout
+*.cbTemp
 
 # Binary
 turbo-meme
